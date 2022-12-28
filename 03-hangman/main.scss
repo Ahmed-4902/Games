@@ -1,0 +1,254 @@
+// start Varibles
+$size: 4px;
+$main-color: #222;
+// End Varibles
+* {
+   box-sizing: border-box;
+}
+body {
+   font-family: Tahoma, arial;
+}
+.container {
+   margin: 20px auto;
+   width: 1000px;
+   .game-info {
+      display: flex;
+      .game-name {
+         flex: 1;
+      }
+      .category {
+         flex: 1;
+         text-align: right;
+         span {
+            text-transform: capitalize;
+            color: #e91e63;
+            font-weight: bold;
+         }
+      }
+   }
+   hr {
+      border: 1px solid #eee;
+   }
+   .row {
+      display: flex;
+      .hangman-draw {
+         flex: 1;
+         background-color: #f8f8f8;
+         padding: 20px;
+         height: 324px;
+         &.wrong-1 .the-draw {
+            display: block;
+         }
+         &.wrong-2 .the-draw .the-stand {
+            display: block;
+         }
+         &.wrong-3 .the-draw .the-hang {
+            display: block;
+         }
+         &.wrong-4 .the-draw .the-rope {
+            display: block;
+         }
+         &.wrong-5 .the-draw .the-man .head {
+            display: block;
+         }
+         &.wrong-6 .the-draw .the-man .body {
+            display: block;
+         }
+         &.wrong-7 .the-draw .the-man .hands {
+            display: block;
+         }
+         &.wrong-8 .the-draw .the-man .legs {
+            display: block;
+         }
+         .the-draw {
+            width: 60px;
+            height: 280px;
+            border-bottom: $size solid $main-color;
+            position: relative;
+            margin: auto;
+            left: -60px;
+            display: none;
+            
+            .the-stand {
+               position: absolute;
+               width: $size;
+               background-color: $main-color;
+               height: 100%;
+               left: 50%;
+               margin-left: -2px;
+               display: none;
+            }
+            .the-hang {
+               display: none;
+               &::before {
+                  content: "";
+                  position: absolute;
+                  height: $size;
+                  background-color: $main-color;
+                  width: 100px;
+                  left: 30px;
+                  top: 10px;
+               }
+               &::after {
+                  content: "";
+                  position: absolute;
+                  width: $size;
+                  height: 30px;
+                  background-color: $main-color;
+                  left: 130px;
+                  top: 10px;
+               }
+            }
+            .the-rope {
+               width: 70px;
+               height: 70px;
+               border-radius: 50%;
+               position: absolute;
+               left: 96px;
+               top: 36px;
+               border: $size dashed $main-color;
+               display: none;
+            }
+            .the-man {
+               .head {
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  border: $size solid $main-color;
+                  position: absolute;
+                  left: 106px;
+                  top: 46px;
+                  display: none;
+               }
+               .body {
+                  position: absolute;
+                  background-color: $main-color;
+                  width: $size;
+                  height: 110px;
+                  top: 94px;
+                  left: 130px;
+                  display: none;
+               }
+               .hands {
+                  display: none;
+                  &::before,
+                  &::after {
+                     content: "";
+                     position: absolute;
+                     width: 50px;
+                     height: $size;
+                     background-color: $main-color;
+                     top: 125px;
+                  }
+                  &::before {
+                     left: 85px;
+                     transform: rotate(30deg);
+                  }
+                  &::after {
+                     left: 130px;
+                     transform: rotate(-30deg);
+                  }
+               }
+               .legs {
+                  display: none;
+                  &::before,
+                  &::after {
+                     content: "";
+                     position: absolute;
+                     width: 50px;
+                     height: $size;
+                     background-color: $main-color;
+                     top: 214px;
+                  }
+                  &::before {
+                     left: 85px;
+                     transform: rotate(-30deg);
+                  }
+                  &::after {
+                     left: 130px;
+                     transform: rotate(30deg);
+                  }
+               }
+            }
+         }
+      }
+      .letters {
+         flex: 1;
+         padding: 20px;
+         text-align: center;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         &.finished {
+            pointer-events: none;
+         }
+         .letter-box {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #009688;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 24px;
+            &.clicked {
+               background-color: $main-color;
+               opacity: 0.2;
+               pointer-events: none;
+            }
+         }
+      }
+   }
+   .letters-guess {
+      margin: 10px auto;
+      background-color: #f8f8f8;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 104px;
+      span {
+         width: 60px;
+         height: 60px;
+         font-size: 22px;
+         margin-right: 10px;
+         text-align: center;
+         line-height: 60px;
+         text-transform: uppercase;
+         font-weight: bold;
+         background-color: #fdfdfd;
+         border-bottom: 3px solid $main-color;
+         transition: 0.3s;
+         &.with-space {
+            background-color: none;
+            border-bottom: none;
+            position: relative;
+            &::before {
+               content: "";
+               position: absolute;
+               width: 20px;
+               height: $size;
+               background-color: $main-color;
+               left: 50%;
+               top: 50%;
+               transform: translate(-50%, -50%);
+            }
+         }
+      }
+   }
+}
+.popup {
+   position: fixed;
+   background-color: #009688;
+   padding: 100px 20px;
+   width: 80%;
+   top: 10%;
+   left: 0%;
+   text-align: center;
+   font-size: 40px;
+   border: 1px solid #ccc;
+   color: #fff;
+}

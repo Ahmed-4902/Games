@@ -1,0 +1,359 @@
+@import "./_mixins.scss";
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
+
+$padding: 20px;
+$border-radius: 10px;
+$font-family: "Barlow Semi Condensed", sans-serif;
+$font-normal: 14px;
+$font-medium: 18px;
+$font-large: 24px;
+$font-xLarge: 32px;
+$font-2xLarge: 48px;
+$weight-600: 600;
+$weight-700: 700;
+$color-dark-text: #3b4363;
+$color-score-text: #2a46c0;
+$color-header-outline: #606e85;
+$max-width: 600px;
+$game-content-height: 350px;
+$animation: 0.3s;
+$ratio: 160px;
+$x-position: 105px;
+$text-x-position: 160px;
+$active-scale: 1.5;
+$animation-ratio: 1;
+$text-ratio: 1;
+
+* {
+   box-sizing: border-box;
+}
+img[src=""] {
+   display: none;
+}
+
+.container {
+   background: linear-gradient(#1f3756, #141539); // background-color: red;
+   min-height: 100vh;
+   width: 100%;
+   font-family: $font-family;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: #fff;
+   overflow: hidden;
+   padding: $padding;
+
+   .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: $max-width;
+   }
+   .rules {
+      text-transform: uppercase;
+      border: 2px solid $color-header-outline;
+      margin-left: auto;
+      padding: $padding $padding * 2;
+      border-radius: $border-radius;
+      letter-spacing: 2px;
+      font-size: $font-medium;
+      cursor: pointer;
+      @include mobile {
+         margin: auto;
+      }
+   }
+}
+
+.header {
+   @include between-flex;
+   width: 100%;
+   border: 2px solid $color-header-outline;
+   padding: $padding;
+   border-radius: $border-radius;
+   margin-bottom: $padding;
+   .logo {
+      display: flex;
+      flex-direction: column;
+      font-size: $font-xLarge;
+      line-height: 26px;
+      text-shadow: 0 3px 5px rgba(0, 0, 0, 1);
+      text-transform: uppercase;
+      font-weight: $weight-700;
+   }
+   .score-content {
+      background-color: #fff;
+      border-radius: $border-radius;
+      padding: $padding / 2 $padding * 1.5;
+      text-align: center;
+      font-weight: $weight-600;
+      .text {
+         color: $color-score-text;
+         text-transform: uppercase;
+         letter-spacing: 2px;
+         font-size: $font-normal;
+      }
+      .number {
+         color: $color-dark-text;
+         font-size: $font-2xLarge;
+         font-weight: $weight-700;
+      }
+   }
+}
+
+.modal {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   z-index: 1;
+   transition: all $animation;
+   @include center-flex;
+   @include hide-tag;
+   &.active {
+      @include show-tag;
+   }
+   .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+   }
+   .content {
+      display: flex;
+      flex-direction: column;
+      margin: $padding;
+      border-radius: $border-radius;
+      padding: $padding;
+      background-color: #fff;
+      z-index: 1;
+   }
+   .header {
+      @include between-flex;
+      margin-bottom: $padding;
+      .text {
+         text-transform: uppercase;
+         font-size: $font-medium;
+         font-weight: $weight-600;
+         color: $color-dark-text;
+      }
+      img {
+         cursor: pointer;
+      }
+   }
+   .image {
+      width: 100%;
+   }
+}
+
+.game-content {
+   position: relative;
+   display: flex;
+   justify-content: space-evenly;
+   margin: auto 0;
+   width: 100%;
+   height: $game-content-height;
+   transition: all $animation;
+   @include mobile {
+      $active-scale: 1.2;
+      $text-ratio: 0.8;
+      margin-top: 0;
+      transform: scale(0.9);
+   }
+   &.active {
+      .game-choice,
+      .background {
+         @include hide-tag;
+      }
+      .text,
+      .game-choice.computer {
+         @include show-tag;
+      }
+   }
+   &.reveal-result {
+      display: flex;
+      $animation-ratio: 1.6;
+      $text-ratio: 1.6;
+
+      @include mobile {
+         $animation-ratio: 1;
+         $text-ratio: 0.8;
+      }
+      .game-choice.computer {
+         transform: scale($active-scale) translate($x-position * 1.6, 75px);
+      }
+      .game-choice.active {
+         transform: scale($active-scale) rotate(360deg)
+            translate(($x-position * 1.6 * -1), 75px);
+      }
+      .text.you {
+         transform: translate($ratio * 1.6 * -1, 0);
+      }
+      .text.computer {
+         transform: translate($ratio * 1.6);
+      }
+      .result {
+         @include show-tag;
+         transform: scale(1);
+
+         @include mobile {
+            margin-bottom: -80px;
+            justify-content: flex-end;
+         }
+      }
+   }
+   &.lost {
+      transition-delay: $animation * 2;
+      filter: grayscale(1) opacity(0.7);
+   }
+
+   .background {
+      background: url("../imgs/bg-triangle.svg") center no-repeat;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+   }
+   .text {
+      position: absolute;
+      text-transform: uppercase;
+      font-size: $font-large;
+      font-weight: $weight-600;
+      transition: all $animation;
+      @include hide-tag;
+      &.you {
+         transform: translate($ratio * $text-ratio * -1, 0);
+      }
+      &.computer {
+         transform: translate($ratio * $text-ratio);
+      }
+   }
+   .countdownText {
+      font-size: $font-2xLarge;
+      color: $color-dark-text;
+   }
+   .game-choice {
+      background-color: #fff;
+      position: absolute;
+      @include center-flex;
+      border-radius: 50%;
+      width: $ratio;
+      height: $ratio;
+      padding: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all $animation;
+      &::before {
+         content: "";
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0px;
+      }
+      &::after {
+         content: "";
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+         border-radius: 50%;
+      }
+      &:active {
+         .image {
+            &::before {
+               @include hide-tag;
+            }
+         }
+         &::after {
+            @include hide-tag;
+         }
+      }
+      &.paper {
+         transform: translate(-120px);
+         &:before {
+            background: linear-gradient(#4865f4, #5671f5);
+         }
+         &:after {
+            border-bottom: 6px solid #4154b4;
+         }
+      }
+      &.scissors {
+         transform: translate(120px);
+         &:before {
+            background: linear-gradient(#ec9e0e, #eca922);
+         }
+         &:after {
+            border-bottom: 6px solid #bc861a;
+         }
+      }
+      &.rock {
+         transform: translate(0, $ratio);
+         &:before {
+            background: linear-gradient(#dc2e4e, #dd405d);
+         }
+         &:after {
+            border-bottom: 6px solid hsl(349, 62%, 32%);
+         }
+      }
+      &.computer {
+         @include hide-tag;
+         transform: scale($active-scale)
+            translate($x-position * $animation-ratio, 75px);
+         transition: all $animation;
+         pointer-events: none;
+      }
+      &.active {
+         opacity: 1 !important;
+         visibility: visible !important;
+         transform: scale($active-scale) rotate(360deg)
+            translate(($x-position * $animation-ratio * -1), 75px);
+         pointer-events: none;
+      }
+   }
+   .image {
+      @include center-flex;
+      border-radius: 50%;
+      flex: 1;
+      height: 100%;
+      position: relative;
+      background-color: #fff;
+      pointer-events: none;
+      &::before {
+         content: "";
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+         border-radius: 50%;
+         border-top: 6px solid rgba(0, 0, 0, 0.1);
+      }
+   }
+   .result {
+      @include center-flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      transform: calc(0.5);
+      transition: all $animation;
+      @include hide-tag;
+      .text {
+         font-size: $font-2xLarge;
+         margin-bottom: $border-radius;
+      }
+      .button {
+         border: none;
+         background-color: #fff;
+         border-radius: $border-radius;
+         padding: $padding $padding * 3;
+         color: $color-dark-text;
+         font-weight: $weight-700;
+         font-size: $font-normal;
+         text-transform: uppercase;
+         letter-spacing: 2px;
+         z-index: 1;
+         cursor: pointer;
+      }
+   }
+}

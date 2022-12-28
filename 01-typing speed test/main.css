@@ -1,0 +1,233 @@
+:root {
+   --main-color: #2196f3;
+}
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+body {
+   font-family: "Open Sans", sans-serif;
+}
+.game {
+   background-color: #eee;
+   height: 100vh;
+   overflow: hidden;
+}
+.welcome {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #2196f3;
+   width: 400px;
+   height: 200px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   border-radius: 15px;
+   z-index: 3;
+}
+.welcome p {
+   color: #fff;
+   font-weight: bold;
+   font-size: 2rem;
+   margin-bottom: 20px;
+}
+.welcome input {
+   width: 200px;
+   height: 40px;
+   border: none;
+   outline: none;
+   border-radius: 3px;
+   padding-left: 10px;
+   font-size: 1.5rem;
+}
+.welcome button {
+   padding: 10px 20px;
+   font-size: 1.4rem;
+   margin-top: 10px;
+   font-weight: bold;
+   background-color: #5da7db;
+   border: none;
+   outline: none;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
+}
+.overlay {
+   background-color: #00000099;
+   width: 100%;
+   height: 100vh;
+   position: absolute;
+   z-index: 2;
+}
+.container {
+   margin: auto;
+   max-width: 900px;
+}
+.name {
+   background-color: var(--main-color);
+   color: white;
+   padding: 20px;
+   font-size: 25px;
+   text-align: center;
+   font-weight: bold;
+}
+.message {
+   background-color: white;
+   padding: 15px;
+   margin: 15px 0;
+   border-radius: 6px;
+   text-align: center;
+}
+.message span {
+   font-weight: bold;
+   color: #009688;
+}
+.message span::before {
+   content: "[ ";
+}
+.message span::after {
+   content: " ]";
+}
+.start {
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
+   background-color: #009688;
+   color: white;
+   padding: 20px;
+   cursor: pointer;
+   border-radius: 5px;
+}
+.return {
+   background-color: #f44336;
+}
+.the-word {
+   text-align: center;
+   font-weight: bold;
+   font-size: 60px;
+   color: var(--main-color);
+   user-select: none;
+   margin-top: 10px;
+}
+.the-word.good {
+   color: var(--main-color);
+}
+.the-word.bad {
+   color: red;
+}
+
+.input {
+   margin: 15px 0;
+   width: 100%;
+   display: block;
+   padding: 15px;
+   border: 3px solid var(--main-color);
+   font-size: 20px;
+   text-align: center;
+   text-transform: capitalize;
+   border-radius: 6px;
+   caret-color: var(--main-color);
+}
+.input:focus {
+   outline: none;
+}
+.upcoming-words {
+   background-color: white;
+   margin: 15px 0;
+   padding: 15px;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   border-radius: 5px;
+   display: block;
+   text-align: center;
+}
+.upcoming-words div {
+   background-color: var(--main-color);
+   color: white;
+   font-weight: bold;
+   margin: 4px;
+   padding: 10px;
+   border-radius: 6px;
+   display: inline-block;
+}
+.control {
+   display: flex;
+   justify-content: space-between;
+   background-color: white;
+   padding: 15px;
+   border-radius: 5px;
+}
+.control select {
+   width: 100px;
+   padding-left: 5px;
+   outline: none;
+   color: #009688;
+}
+.control select option {
+   color: #009688;
+}
+.control span {
+   font-weight: bold;
+   color: #009688;
+}
+.score-container {
+   background-color: #fff;
+   margin-top: 20px;
+   padding: 20px;
+   border-radius: 5px;
+   position: absolute;
+   top: 80px;
+   width: 900px;
+   z-index: 2;
+}
+.score-container h2 {
+   text-align: center;
+   margin-bottom: 10px;
+}
+.score-container .player {
+   margin-bottom: 10px;
+   background-color: #009688;
+   color: #fff;
+   padding: 5px 20px;
+   font-weight: bold;
+   border-radius: 5px;
+}
+.score-container .player p {
+   text-align: center;
+   font-size: 1.5rem;
+   margin-bottom: 5px;
+}
+.score-container .player .info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.show-score {
+   position: absolute;
+   right: 20px;
+   bottom: 20px;
+   padding: 20px 30px;
+   border: 3px solid var(--main-color);
+   border-radius: 10px;
+   cursor: pointer;
+   letter-spacing: 2px;
+   font-weight: bold;
+   transition: 0.3s;
+   z-index: 1;
+}
+.show-score:hover {
+   color: #fff;
+   background-color: var(--main-color);
+}
+
+.hide-tag {
+   opacity: 0;
+   display: none;
+   visibility: hidden;
+}

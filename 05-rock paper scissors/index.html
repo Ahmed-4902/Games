@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Rock Paper Scissors</title>
+      <link rel="stylesheet" href="styles/main.css" />
+      <link rel="stylesheet" href="styles/reset.css" />
+      <link rel="icon" href="imgs/rock-paper-scissors.png" />
+   </head>
+   <body>
+      <div class="container">
+         <div class="modal">
+            <div class="overlay"></div>
+            <div class="content">
+               <div class="header">
+                  <p class="text">RULES</p>
+                  <img class="close-icon" src="imgs/icon-close.svg" alt="" />
+               </div>
+               <div class="image">
+                  <img src="imgs/image-rules.svg" alt="" />
+               </div>
+            </div>
+         </div>
+
+         <div class="content">
+            <div class="header">
+               <div class="logo">
+                  <span>rock</span>
+                  <span>paper</span>
+                  <span>scissors</span>
+               </div>
+               <div class="score-content">
+                  <div class="text">Score</div>
+                  <div class="number">0</div>
+               </div>
+            </div>
+            <div class="game-content">
+               <div class="background"></div>
+               <!-- GAME TEXT -->
+               <div class="text you">You picked</div>
+               <div class="text computer">The house picked</div>
+               <!-- GAME CHOICES -->
+               <div class="game-choice paper" data-choice="paper">
+                  <div class="image">
+                     <img src="./imgs/icon-paper.svg" alt="paper choice" />
+                  </div>
+               </div>
+
+               <div class="game-choice scissors" data-choice="scissors">
+                  <div class="image">
+                     <img
+                        src="./imgs/icon-scissors.svg"
+                        alt="scissors choice"
+                     />
+                  </div>
+               </div>
+
+               <div class="game-choice rock" data-choice="rock">
+                  <div class="image">
+                     <img src="./imgs/icon-rock.svg" alt="rock choice" />
+                  </div>
+               </div>
+
+               <div class="result">
+                  <lottie-player
+                     src=""
+                     background="transparent"
+                     speed="1"
+                     style="width: 300px; height: 300px"
+                     autoplay
+                  ></lottie-player>
+                  <span class="text">You Win</span>
+                  <button class="button">Play again</button>
+               </div>
+
+               <div class="game-choice computer" data-choice="computer">
+                  <div class="image">
+                     <span class="countdownText"></span>
+                     <img class="game-choice-image" alt="" />
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="rules">rules</div>
+      </div>
+      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+      <script src="main.js"></script>
+   </body>
+</html>
